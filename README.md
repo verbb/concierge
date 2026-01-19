@@ -1,4 +1,4 @@
-<p align="center"><img src="https://verbb.imgix.net/plugins/concierge/concierge-icon.svg" width="100" height="100" alt="Concierge icon"></p>
+<p align="center"><img src="https://assets.verbb.io/plugins/concierge/concierge-icon.svg" width="100" height="100" alt="Concierge icon"></p>
 <h1 align="center">Concierge for Craft CMS</h1>
 
 Concierge is a Craft CMS plugin for creating email notifications on user events.
