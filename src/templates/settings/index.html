@@ -4,59 +4,52 @@
 {% import 'verbb-base/_macros' as macros %}
 
 {% set fullPageForm = true %}
-{% set selectedNavItem = 'general' %}
+{% set selectedTab = 'general' %}
+{% set pageTitle = 'General Settings' | t('concierge') %}
+{% set pageAction = 'plugins/save-plugin-settings' %}
+{% set pageUrl = 'concierge/settings' %}
 
-{% block blockContent %}
-
-<input type="hidden" name="action" value="plugins/save-plugin-settings">
-<input type="hidden" name="pluginHandle" value="concierge">
-
-{% namespace 'settings' %}
-
-{{ forms.booleanMenuField({
-    first: true,
-    label: 'Send Account Activation Email' | t('concierge'),
-    instructions: 'Whether to send an email to the user when their account is activated. See [System Messages]({link}) to edit.' | t('concierge', { link: cpUrl('utilities/system-messages') }),
-    id: 'accountActivationEmailEnabled',
-    name: 'accountActivationEmailEnabled',
-    suggestEnvVars: true,
-    value: settings.accountActivationEmailEnabled,
-    errors: settings.getErrors('accountActivationEmailEnabled'),
-    warning: macros.configWarning('accountActivationEmailEnabled', 'concierge'),
-}) }}
-
-{{ forms.booleanMenuField({
-    label: 'Send Moderator Account Registration Email' | t('concierge'),
-    instructions: 'Whether to send an email to moderators when a user has registered. See [System Messages]({link}) to edit.' | t('concierge', { link: cpUrl('utilities/system-messages') }),
-    id: 'moderatorRegistrationEmailEnabled',
-    name: 'moderatorRegistrationEmailEnabled',
-    suggestEnvVars: true,
-    toggle: 'moderator-details',
-    value: settings.moderatorRegistrationEmailEnabled,
-    errors: settings.getErrors('moderatorRegistrationEmailEnabled'),
-    warning: macros.configWarning('moderatorRegistrationEmailEnabled', 'concierge'),
-}) }}
-
-<div id="moderator-details" class="{% if not settings.moderatorRegistrationEmailEnabled %}hidden{% endif %}">
-    {% set groups = [{ label: 'None' | t('concierge'), value: '' }] %}
-
-    {% for group in craft.app.userGroups.getAllGroups() %}
-        {% set groups = groups | merge([{ label: group.name, value: group.uid }]) %}
-    {% endfor %}
-
-    {{ forms.selectField({
-        label: 'Moderator User Group' | t('concierge'),
-        instructions: 'Select the user group for moderators. Each user in this group will receive moderator emails.' | t('concierge'),
-        id: 'moderatorUserGroup',
-        name: 'moderatorUserGroup',
+{% block settingsContent %}
+    {{ forms.booleanMenuField({
+        label: 'Send Account Activation Email' | t('concierge'),
+        instructions: 'Whether to send an email to the user when their account is activated. See [System Messages]({link}) to edit.' | t('concierge', { link: cpUrl('utilities/system-messages') }),
+        id: 'accountActivationEmailEnabled',
+        name: 'accountActivationEmailEnabled',
         suggestEnvVars: true,
-        value: settings.moderatorUserGroup,
-        options: groups,
-        errors: settings.getErrors('moderatorUserGroup'),
-        warning: macros.configWarning('moderatorUserGroup', 'concierge'),
+        value: settings.accountActivationEmailEnabled,
+        errors: settings.getErrors('accountActivationEmailEnabled'),
+        warning: macros.configWarning('accountActivationEmailEnabled', 'concierge'),
     }) }}
-</div>
 
-{% endnamespace %}
+    {{ forms.booleanMenuField({
+        label: 'Send Moderator Account Registration Email' | t('concierge'),
+        instructions: 'Whether to send an email to moderators when a user has registered. See [System Messages]({link}) to edit.' | t('concierge', { link: cpUrl('utilities/system-messages') }),
+        id: 'moderatorRegistrationEmailEnabled',
+        name: 'moderatorRegistrationEmailEnabled',
+        suggestEnvVars: true,
+        toggle: 'moderator-details',
+        value: settings.moderatorRegistrationEmailEnabled,
+        errors: settings.getErrors('moderatorRegistrationEmailEnabled'),
+        warning: macros.configWarning('moderatorRegistrationEmailEnabled', 'concierge'),
+    }) }}
 
+    <div id="moderator-details" class="{% if not settings.moderatorRegistrationEmailEnabled %}hidden{% endif %}">
+        {% set groups = [{ label: 'None' | t('concierge'), value: '' }] %}
+
+        {% for group in craft.app.userGroups.getAllGroups() %}
+            {% set groups = groups | merge([{ label: group.name, value: group.uid }]) %}
+        {% endfor %}
+
+        {{ forms.selectField({
+            label: 'Moderator User Group' | t('concierge'),
+            instructions: 'Select the user group for moderators. Each user in this group will receive moderator emails.' | t('concierge'),
+            id: 'moderatorUserGroup',
+            name: 'moderatorUserGroup',
+            suggestEnvVars: true,
+            value: settings.moderatorUserGroup,
+            options: groups,
+            errors: settings.getErrors('moderatorUserGroup'),
+            warning: macros.configWarning('moderatorUserGroup', 'concierge'),
+        }) }}
+    </div>
 {% endblock %}
