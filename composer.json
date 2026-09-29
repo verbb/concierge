@@ -1,6 +1,6 @@
 {
     "name": "verbb/concierge",
-    "description": "Email notifications for user registration.",
+    "description": "A Craft CMS plugin for user registration and activation email notifications.",
     "type": "craft-plugin",
     "version": "4.0.3",
     "keywords": [
