@@ -12,5 +12,5 @@ class ConciergeVariable
     {
         return Concierge::$plugin;
     }
-    
+
 }

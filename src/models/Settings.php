@@ -29,11 +29,11 @@ class Settings extends Model
         if ($oldClientId = ArrayHelper::remove($config, 'concierge_moderation_enabled')) {
             $config['moderationEnabled'] = $oldClientId;
         }
-        
+
         if ($oldClientId = ArrayHelper::remove($config, 'concierge_activated_enabled')) {
             $config['accountActivationEmailEnabled'] = $oldClientId;
         }
-        
+
         if ($oldClientId = ArrayHelper::remove($config, 'concierge_mod_notification_enabled')) {
             $config['moderatorRegistrationEmailEnabled'] = $oldClientId;
         }
