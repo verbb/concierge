@@ -1,6 +1,6 @@
 {% extends parentLayout ?? '_layouts/cp' %}
 
-{% do view.registerAssetBundle('verbb\\concierge\\assetbundles\\ConciergeAsset') %}
+{% do view.registerAssetBundle('verbb\\concierge\\web\\assets\\cp\\ConciergeAsset') %}
 
 {% if title is not defined %}
     {% set title = 'Concierge' | t('concierge') %}
